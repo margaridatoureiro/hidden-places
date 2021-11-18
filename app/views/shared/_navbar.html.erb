@@ -8,7 +8,9 @@
   </button>
 
   <div class="search-bar">
+    <% if controller_name == 'pages' && action_name == 'home' %>
     <%= render 'shared/search-bar' %>
+    <% end %>
   </div>
 
 
