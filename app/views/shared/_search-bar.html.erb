@@ -1,0 +1,5 @@
+<div class="form-inline">
+  <%= form_tag places_path, method: :get%>
+  <%= text_field_tag :query, params[:query], class: 'form-control'%>
+  <%= submit_tag "Search", class: "btn btn-success" %>
+</div>

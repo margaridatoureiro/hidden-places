@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="places-container">
+      <h1>List of very cool places</h1>
+      <ul>
+        <% @places.each do |place| %>
+          <li><%= link_to place.name.capitalize, place_path(place)%></li>
+        <% end %>
+      </ul>
+     <%= link_to "Go back", :back, class: "btn btn-primary"%>
+    </div>
+  </div>
+</div>

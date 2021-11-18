@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6 p-4" >
+      <%= simple_form_for [@user, @place] do |f| %>
+        <%= f.input :name %>
+        <%= f.input :category, collection: @categories, label: false, prompt: "Filter by category" %>
+        <%= f.input :description %>
+        <%= f.input :address %>
+        <div class="d-flex justify-content-between">
+          <%= f.submit 'Add Place', class: "btn btn-success" %>
+          <%= link_to "Go back", :back, class: "btn btn-primary"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

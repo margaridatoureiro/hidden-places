@@ -1,0 +1,19 @@
+<div class="container">
+
+   <div class="row justify-content-center">
+
+    <div class="place-card">
+      <h1>Welcome to <%= @place.name %></h1>
+      <h3><%= @place.description %></h3>
+      <h3><%= @place.category %></h3>
+      <h3><%= @place.address %></h3>
+      <h3> Author: <%= @place.user.username %> </h3>
+      <% if current_user == @place.user %>
+        <%= link_to "Edit Place", edit_place_path(@place), class:"btn btn-warning" %>
+      <% else %>
+        <%= link_to "Add a review", new_place_review_path(@place), class:"btn btn-success" %>
+      <% end %>
+       <%= link_to "Go back", :back, class: "btn btn-primary"%>
+    </div>
+  </div>
+</div>
