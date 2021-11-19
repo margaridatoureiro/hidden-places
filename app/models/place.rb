@@ -3,6 +3,7 @@ class Place < ApplicationRecord
   belongs_to :user
   has_many :favourites, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many_attached :photos
   validates :name, :description, :category, presence: true
   validates :category, inclusion: {in: CATEGORIES, message: "%{value} is not a valid category"}
   include PgSearch::Model

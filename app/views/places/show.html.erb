@@ -7,6 +7,9 @@
       <h3><%= @place.description %></h3>
       <h3><%= @place.category %></h3>
       <h3><%= @place.address %></h3>
+      <% @place.photos.each do |photo| %>
+      <%= cl_image_tag photo.key, width: 400, crop: :fill %>
+      <% end %>
       <h3> Author: <%= @place.user.username %> </h3>
       <% if current_user == @place.user %>
         <%= link_to "Edit Place", edit_place_path(@place), class:"btn btn-warning" %>
