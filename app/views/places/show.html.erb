@@ -1,26 +1,59 @@
-<div class="my-container">
+<div class="container">
 
-   <div class="show-page-content">
+   <div class="row justify-content-center">
 
-    <div>
-      <div class="place-card">
+   <!--  <div> -->
+      <div class="place-card w-100">
         <h1>Welcome to <%= @place.name %></h1>
-        <h3><%= @place.description %></h3>
-        <h3><%= @place.category %></h3>
-        <h3><%= @place.address %></h3>
-        <% @place.photos.each do |photo| %>
-        <%= cl_image_tag photo.key, width: 400, crop: :fill %>
+        <h5><%= @place.description %></h5>
+        <h5><%= @place.category %></h5>
+        <h5><%= @place.address %></h5>
+        <% if @place.photos.any? %>
+          <div class="my-carousel-container w-50" style="margin: 10px auto;">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <%#= image_tag "lisbon.jpg", class: "w-100" %>
+                   <%= cl_image_tag @place.photos[0].key, height: 400, crop: :fill, class: "w-100"%>
+                  <!-- <img class="d-block w-100" src="/../../assets/images/lisbon.jpg" alt="First slide"> -->
+                </div>
+                <div class="carousel-item">
+                  <%= cl_image_tag @place.photos[1].key, height: 400, crop: :fill, class: "w-100" %>
+                  <!-- <img class="d-block w-100" src="..." alt="Second slide"> -->
+                </div>
+                <div class="carousel-item">
+                    <%= cl_image_tag @place.photos[2].key, height: 400, crop: :fill, class: "w-100" %>
+               <!-- <img class="d-block w-100" src="..." alt="Third slide"> -->
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
         <% end %>
         <h3> Author: <%= @place.user.username %> </h3>
-        <% if current_user == @place.user %>
-          <%= link_to "Edit Place", edit_place_path(@place), class:"btn btn-warning" %>
-        <% else %>
-          <%= link_to "Add a review", new_place_review_path(@place), class:"btn btn-success" %>
-        <% end %>
-         <%= link_to "Go back", :back, class: "btn btn-primary"%>
+        <div class="show-links">
+          <% if current_user == @place.user %>
+            <%= link_to "Edit Place", edit_place_path(@place), class:"btn btn-warning" %>
+          <% else %>
+            <%= link_to "Add a review", new_place_review_path(@place), class:"btn btn-success" %>
+          <% end %>
+           <%= link_to "Go back", :back, class: "btn btn-primary"%>
+           </div>
       </div>
 
-      <div class="reviews-card">
+      <div class="reviews-card w-100">
         <h1>Check out the Reviews</h1>
         <% @place.reviews.each do |review| %>
         <h2><%= review.title %></h2>
@@ -28,11 +61,11 @@
         <h5><%= review.rating %> stars</h5>
         <% end %>
       </div>
-      <div id="map"
-     style="width: 100%; height: 600px;"
+      <div id="map", class="w-100"
+     style="width: 100%; height: 600px; margin: 20px; padding: 30px"
      data-markers="<%= @markers.to_json %>"
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-    </div>
+    <!-- </div> -->
 
   </div>
 </div>

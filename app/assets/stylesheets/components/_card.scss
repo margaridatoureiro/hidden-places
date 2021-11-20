@@ -2,6 +2,9 @@
   padding: 30px;
   background-color: white;
   margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 
@@ -9,4 +12,8 @@
   padding: 30px;
   background-color: white;
   margin: 20px;
+}
+
+.show-links {
+  text-align: center;
 }
