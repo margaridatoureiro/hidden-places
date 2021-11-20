@@ -1,22 +1,34 @@
-<div class="container">
+<div class="my-container">
 
-   <div class="row justify-content-center">
+   <div class="show-page-content">
 
-    <div class="place-card">
-      <h1>Welcome to <%= @place.name %></h1>
-      <h3><%= @place.description %></h3>
-      <h3><%= @place.category %></h3>
-      <h3><%= @place.address %></h3>
-      <% @place.photos.each do |photo| %>
-      <%= cl_image_tag photo.key, width: 400, crop: :fill %>
-      <% end %>
-      <h3> Author: <%= @place.user.username %> </h3>
-      <% if current_user == @place.user %>
-        <%= link_to "Edit Place", edit_place_path(@place), class:"btn btn-warning" %>
-      <% else %>
-        <%= link_to "Add a review", new_place_review_path(@place), class:"btn btn-success" %>
-      <% end %>
-       <%= link_to "Go back", :back, class: "btn btn-primary"%>
+    <div>
+      <div class="place-card">
+        <h1>Welcome to <%= @place.name %></h1>
+        <h3><%= @place.description %></h3>
+        <h3><%= @place.category %></h3>
+        <h3><%= @place.address %></h3>
+        <% @place.photos.each do |photo| %>
+        <%= cl_image_tag photo.key, width: 400, crop: :fill %>
+        <% end %>
+        <h3> Author: <%= @place.user.username %> </h3>
+        <% if current_user == @place.user %>
+          <%= link_to "Edit Place", edit_place_path(@place), class:"btn btn-warning" %>
+        <% else %>
+          <%= link_to "Add a review", new_place_review_path(@place), class:"btn btn-success" %>
+        <% end %>
+         <%= link_to "Go back", :back, class: "btn btn-primary"%>
+      </div>
+
+      <div class="reviews-card">
+        <h1>Check out the Reviews</h1>
+        <% @place.reviews.each do |review| %>
+        <h2><%= review.title %></h2>
+        <h5><%= review.description %></h5>
+        <h5><%= review.rating %> stars</h5>
+        <% end %>
+      </div>
     </div>
+
   </div>
 </div>

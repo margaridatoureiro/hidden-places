@@ -7,9 +7,16 @@ class PlacesController < ApplicationController
     else
       @places = Place.all.order(created_at: :desc)
     end
+      @markers = @places.geocoded.map do |flat|
+      {
+        lat: flat.latitude,
+        lng: flat.longitude
+      }
+    end
   end
 
   def show
+    @markers = [{ lat: @place.latitude, lng: @place.longitude }]
   end
 
   def new
