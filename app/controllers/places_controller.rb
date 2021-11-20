@@ -7,16 +7,18 @@ class PlacesController < ApplicationController
     else
       @places = Place.all.order(created_at: :desc)
     end
-      @markers = @places.geocoded.map do |flat|
+      @markers = @places.geocoded.map do |place|
       {
-        lat: flat.latitude,
-        lng: flat.longitude
+        lat: place.latitude,
+        lng: place.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { place: place }),
+        image_url: helpers.asset_url("#{place.category}.png")
       }
     end
   end
 
   def show
-    @markers = [{ lat: @place.latitude, lng: @place.longitude }]
+    @markers = [{ lat: @place.latitude, lng: @place.longitude, info_window: render_to_string(partial: "info_window", locals: { place: @place }),  image_url: helpers.asset_url("#{@place.category}.png") }]
   end
 
   def new
